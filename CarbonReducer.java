@@ -106,13 +106,28 @@ public class CarbonReducer {
 public static void main(String[] args) throws Exception {
 
     scanner = new Scanner("filescraping.txt");
-
+ File file = new File("filescraping.txt");
     Scanner keyboard = new Scanner(System.in);
     
-    String name = keyboard.nextLine();
-    File file = new File("filescraping.txt");
+    while (true) {
+        System.out.println("Enter the name of the WEC director who's carbon footprint you want to find");
+        String name = keyboard.nextLine();
 
-    search(name);
+        search(name);
+
+
+        System.out.println("Do you want to restart the program with another WEC director?\nType 'y' to continue, or any key to terminate the program");
+        char choice = keyboard.next().charAt(0);
+        if (choice != 'y'){
+            System.out.println("Thank you! Have a great day");
+            break;
+        }
+    }
+    
+    
+   
+
+    
 
 }
 public static void printResult(){
