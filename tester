@@ -1,0 +1,140 @@
+package P1;
+
+import java.io.*;
+import java.util.*;
+
+public class CarbonReducer {
+
+
+        public static Scanner scanner;
+
+        public static int address;
+        public static int redMeat;
+        public static String controller;
+        public static int grains;
+        public static String endPoint;
+        public static int dairy;
+        public static int cellPhone;
+        public static int tv;
+        public static int computer;
+        public static int newYearRes;
+        public static int car;
+        public static int walking;
+        public static int transport;
+
+        public static void main(String[] args) throws IOException {
+
+
+            File file = new File("/Users/billydestounis/Documents/ES1036/Practice/src/P1/filescraping.txt");
+            scanner = new Scanner(file);
+            Scanner keyboard = new Scanner(System.in);
+
+            if (!file.exists()) {
+                System.out.println("File Not Found!");
+                System.exit(0);
+            }
+
+            while (true) {
+                System.out.println("Enter the name of the WEC director who's carbon footprint you want to find");
+                String name = keyboard.nextLine();
+
+                search(name);
+
+
+                System.out.println("Do you want to restart the program with another WEC director?\nType 'y' to continue, or any key to terminate the program");
+                char choice = keyboard.next().charAt(0);
+                if (choice != 'y') {
+                    System.out.println("Thank you! Have a great day");
+                    break;
+                }
+            }
+        }
+
+        public static void search(String name){
+
+            while(true){
+                if(scanner.hasNextLine()){
+
+                    ArrayList<String> nameCheck = new ArrayList(Arrays.asList());
+
+                    String[] myArray = scanner.nextLine().split(" ");
+
+                    for(int i = 0; i < myArray.length; i++){
+                        nameCheck.add(myArray[i]);
+                    }
+
+                    if(nameCheck.contains(name)){
+                        break;
+                    }
+                }else{
+                    System.out.println("The usename you entered does not exist");
+                    break;
+                }
+            }
+
+            //turn next line into arraylist, split at " "
+            //then see if it contains the name inputed
+
+            //now store each value
+
+            controller = scanner.nextLine().split(" ")[1];
+
+            String temp = scanner.nextLine().split("	          ")[1];
+            car = Integer.parseInt(temp.split(" ")[0]);
+            scanner.nextLine();
+
+            temp = scanner.nextLine().split("          ")[1];
+            walking = Integer.parseInt(temp.split(" ")[0]);
+
+            transport = Integer.parseInt(scanner.nextLine().split(" ")[2]);
+            scanner.nextLine();
+
+                endPoint = (scanner.nextLine().split("         ")[1]);
+
+                match();
+
+
+            }
+
+
+        public static void match(){
+
+                    while(true){
+                        while(true){
+                            if(scanner.hasNextLine()){
+                                if(scanner.nextLine().split(" ")[0].equals("Address")) {
+                                    address = Integer.parseInt(scanner.nextLine().split(" ")[1]);
+                                    redMeat = Integer.parseInt(scanner.nextLine().split(" ")[1]);
+
+                                    if(scanner.nextLine() == controller){
+                                        scanner.nextLine();
+                                        grains = Integer.parseInt(scanner.nextLine().split(" ")[1]);
+                                        scanner.nextLine();
+                                    }else{
+                                        break;
+                                    }
+                                        if(scanner.nextLine() == endPoint){
+                                            scanner.nextLine();
+                                            dairy = Integer.parseInt(scanner.nextLine().split(" ")[1]);
+                                            cellPhone = Integer.parseInt(scanner.nextLine().split(" ")[1]);
+                                            tv = Integer.parseInt(scanner.nextLine().split(" ")[1]);
+                                            computer = Integer.parseInt(scanner.nextLine().split(" ")[1]);
+                                            newYearRes = Integer.parseInt(scanner.nextLine().split(" ")[1]);
+                                            break;
+                                        }
+                                     else{
+                                        break;
+                                     }
+                                    }
+                                     break;
+                                    }
+                            else{
+                            scanner = new Scanner("filescraping.txt");
+                        }
+                }
+
+            }
+        }
+
+
+    }
